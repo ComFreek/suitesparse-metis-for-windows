@@ -58,9 +58,13 @@ typedef ptrdiff_t ssize_t;
 #define PTRDIFF_MAX  INT64_MAX
 #endif
 
-#ifdef __MSC__
-/* MSC does not have rint() function */
+#include <math.h>  // rint()
+
+#if defined(_MSC_VER) && (_MSC_VER < 1800) 
 #define rint(x) ((int)((x)+0.5))  
+#endif
+
+#ifdef __MSC__
 
 /* MSC does not have INFINITY defined */
 #ifndef INFINITY
